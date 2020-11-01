@@ -8,7 +8,7 @@ fn main() {
     if let Some(cplex_path) = env_path {
         println!("cargo:rustc-link-search=native={}", cplex_path);
     } else {
-        for path in glob("/opt/ibm/ILOG/*/cplex/lib/*/static_pic").unwrap() {
+        for path in glob("@(/opt/ibm/ILOG/|/Applications/)*/cplex/lib/*/static_pic").unwrap() {
             match path {
                 Ok(libdir) => println!("cargo:rustc-link-search=native={}", libdir.display()),
                 Err(e) => println!("{:?}", e)
